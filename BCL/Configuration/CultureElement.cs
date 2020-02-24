@@ -7,10 +7,11 @@ namespace BCL.Configuration
 {
     public class CultureElement : ConfigurationElement
     {
-        [ConfigurationProperty("culture")]
+        // change type
+        [ConfigurationProperty("name")]
         public string Culture
         {
-            get { return (string)this["culture"]; }
+            get { return (string)this["name"]; }
         }
     }
 }

@@ -7,6 +7,7 @@ namespace BCL.Configuration
 {
     class ListeningFolderElement : ConfigurationElement
     {
+        // change type
         [ConfigurationProperty("path", IsKey = true)]
         public string Path
         {

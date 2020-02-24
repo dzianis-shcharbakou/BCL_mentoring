@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BCL.Configuration;
+using System;
+using System.Configuration;
 
 namespace BCL
 {
@@ -6,6 +8,9 @@ namespace BCL
     {
         static void Main(string[] args)
         {
+            var section = (BclConfigurationSection)ConfigurationManager.GetSection("bclSection");
+            
+
             Console.WriteLine("Hello World!");
         }
     }
