@@ -1,35 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BCL.Configuration
 {
     public class RuleElement : ConfigurationElement
     {
-        //[ConfigurationProperty("name", IsKey = true)]
-        //public string RuleName
-        //{
-        //    get { return (string)this["name"]; }
-        //}
 
-        [ConfigurationProperty("outputFolder")]
-        public string OutputFolder
+        [ConfigurationProperty("outputFolder", IsKey = true, IsRequired = true)]
+        public DirectoryInfo OutputFolder
         {
-            get { return (string)this["outputFolder"]; }
+            get { return (DirectoryInfo)this["outputFolder"]; }
         }
 
-        [ConfigurationProperty("outputFileParam")]
-        public string OutputFileParam
+        [ConfigurationProperty("fileNameMask", IsRequired = true, IsKey = false)]
+        public Regex FileNameMask
         {
-            get { return (string)this["outputFileParam"]; }
+            get { return (Regex)this["fileNameMask"]; }
         }
 
-        //[ConfigurationProperty("fileNameTemplate", IsRequired = false)]
-        //[RegexStringValidator()]
-        //public string FileNameTemplate
-        //{
-        //    get { }
-        //}
+        [ConfigurationProperty("isIndexNumber", DefaultValue = true)]
+        public bool IsIndexNumber
+        {
+            get { return (bool)this["isIndexNumber"]; }
+        }
+
+        [ConfigurationProperty("isRelocationDate", DefaultValue = true)]
+        public bool IsRelocationDate
+        {
+            get { return (bool)this["isRelocationDate"]; }
+        }
     }
 }

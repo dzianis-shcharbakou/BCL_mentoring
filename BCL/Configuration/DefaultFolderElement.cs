@@ -6,11 +6,10 @@ using System.Text;
 
 namespace BCL.Configuration
 {
-    public class ListeningFolderElement : ConfigurationElement
+    public class DefaultFolderElement : ConfigurationElement
     {
-        // change type
-        [ConfigurationProperty("path", DefaultValue = "", IsKey = true, IsRequired = true)]
-        public DirectoryInfo Path
+        [ConfigurationProperty("path", IsKey = true, IsRequired = true)]
+        public DirectoryInfo DefaultFolder
         {
             get { return (DirectoryInfo)this["path"]; }
         }

@@ -13,6 +13,12 @@ namespace BCL.Configuration
             get { return (CultureElement)base["culture"];  } 
         }
 
+        [ConfigurationProperty("defaultFolder")]
+        public DefaultFolderElement DefaultFolder
+        {
+            get { return (DefaultFolderElement)base["defaultFolder"]; }
+        }
+
         [ConfigurationProperty("listeningFolders")]
         public ListeningFolderElementCollection ListeningFolders
         {
