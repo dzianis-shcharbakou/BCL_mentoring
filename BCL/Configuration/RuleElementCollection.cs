@@ -6,7 +6,7 @@ using System.Text;
 namespace BCL.Configuration
 {
     [ConfigurationCollection(typeof(RuleElement), AddItemName = "rule")]
-    class RuleElementCollection : ConfigurationElementCollection
+    public class RuleElementCollection : ConfigurationElementCollection
     {
         protected override ConfigurationElement CreateNewElement()
         {

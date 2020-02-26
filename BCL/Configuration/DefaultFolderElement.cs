@@ -1,5 +1,7 @@
-﻿using System;
+﻿using BCL.Configuration.Converters;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 using System.Text;
@@ -8,6 +10,7 @@ namespace BCL.Configuration
 {
     public class DefaultFolderElement : ConfigurationElement
     {
+        [TypeConverter(typeof(DirectoryInfoTypeConverter))]
         [ConfigurationProperty("path", IsKey = true, IsRequired = true)]
         public DirectoryInfo DefaultFolder
         {

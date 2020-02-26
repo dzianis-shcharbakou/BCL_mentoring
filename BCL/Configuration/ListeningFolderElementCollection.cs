@@ -18,9 +18,9 @@ namespace BCL.Configuration
             return ((ListeningFolderElement)element).Path;
         }
 
-        public ListeningFolderElement this[int idx]
-        {
-            get { return (ListeningFolderElement)BaseGet(idx); }
-        }
+        //public ListeningFolderElement this[int idx]
+        //{
+        //    get { return (ListeningFolderElement)BaseGet(idx); }
+        //}
     }
 }
