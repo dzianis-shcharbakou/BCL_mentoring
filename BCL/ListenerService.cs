@@ -8,9 +8,9 @@ namespace BCL
 {
     public class ListenerService
     {
-        private ListeningFolderElementCollection listeningFolders;
-        private RuleElementCollection rules;
-        private DefaultFolderElement defaultFolder;
+        private readonly ListeningFolderElementCollection listeningFolders;
+        private readonly RuleElementCollection rules;
+        private readonly DefaultFolderElement defaultFolder;
 
         public event EventHandler<MessageEventArgs> RuleExist;
         public event EventHandler<MessageEventArgs> RuleNotExist;
@@ -39,6 +39,19 @@ namespace BCL
             return watcherList;
         }
 
+        public void MoveFile(string name, string fullPath)
+        {
+            var rule = CheckFileRules(name);
+            if (EqualityComparer<RuleElement>.Default.Equals(rule, default(RuleElement)))
+            {
+                MoveToDefault(name, fullPath);
+            }
+            else
+            {
+                MoveWithRule(name, fullPath, rule);
+            }
+        }
+
         private FileSystemWatcher ListenFolder(DirectoryInfo directory)
         {
             var watcher = new FileSystemWatcher
@@ -54,19 +67,6 @@ namespace BCL
             return watcher;
         }
 
-        public void MoveFile(string name, string fullPath)
-        {
-            var rule = CheckFileRules(name);
-            if (EqualityComparer<RuleElement>.Default.Equals(rule, default(RuleElement)))
-            {
-                MoveToDefault(name, fullPath);
-            }
-            else
-            {
-                MoveWithRule(name, fullPath, rule);
-            }
-        }
-
         private void MoveWithRule(string name, string fullPath, RuleElement rule)
         {
             StringBuilder fileNameResult = new StringBuilder();
@@ -80,10 +80,9 @@ namespace BCL
 
             if (rule.IsRelocationDate)
             {
-                fileNameResult.Append(DateTime.Now.ToLongDateString());
+                fileNameResult.Append(DateTime.Now.ToString("dd.MM.yyyy_HH.mm"));
                 fileNameResult.Append("_");
             }
-
             
             fileNameResult.Append(name);
 
@@ -118,6 +117,7 @@ namespace BCL
             return default(RuleElement);
         }
 
+        #region Event methods
         protected void OnFileAppear(object sender, FileSystemEventArgs args)
         {
             var tmp = RuleExist;
@@ -152,6 +152,7 @@ namespace BCL
             if (tmp != null)
                 FileMoved(this, args);
         }
+        #endregion
     }
 
     public class MessageEventArgs : EventArgs
